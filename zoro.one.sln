@@ -5,9 +5,17 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zoro.one", "zoro.one\zoro.one.csproj", "{BC2D63CB-6860-4D25-B5EC-21F1DAF904F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zoro.one.db", "zoro.one.db\zoro.one.db.csproj", "{8B62CD1D-DBD6-4FE0-B8D7-6A4A11636667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zoro.one.db", "zoro.one.db\zoro.one.db.csproj", "{8B62CD1D-DBD6-4FE0-B8D7-6A4A11636667}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zoro.one.chain", "zoro.one.chain\zoro.one.chain.csproj", "{86F955DB-2F99-4D58-9335-25FE21DB3A50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zoro.one.consensus", "zoro.one.consensus\zoro.one.consensus.csproj", "{8F911656-8677-47B9-B45F-4A2D1260C5ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zoro.one.httpserver", "zoro.one.httpserver\zoro.one.httpserver.csproj", "{8C0C5C6D-DAEC-4441-A907-C472750D8C74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zoro.one.httpserver.test", "zoro.one.httpserver.test\zoro.one.httpserver.test.csproj", "{FDA4358A-4CC6-4F46-960A-F29925BCF1A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "http", "http", "{7D6B0ED2-DE56-4D53-AA3A-291FD49D19A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +35,25 @@ Global
 		{86F955DB-2F99-4D58-9335-25FE21DB3A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86F955DB-2F99-4D58-9335-25FE21DB3A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86F955DB-2F99-4D58-9335-25FE21DB3A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F911656-8677-47B9-B45F-4A2D1260C5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F911656-8677-47B9-B45F-4A2D1260C5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F911656-8677-47B9-B45F-4A2D1260C5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F911656-8677-47B9-B45F-4A2D1260C5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C0C5C6D-DAEC-4441-A907-C472750D8C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0C5C6D-DAEC-4441-A907-C472750D8C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0C5C6D-DAEC-4441-A907-C472750D8C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0C5C6D-DAEC-4441-A907-C472750D8C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA4358A-4CC6-4F46-960A-F29925BCF1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA4358A-4CC6-4F46-960A-F29925BCF1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA4358A-4CC6-4F46-960A-F29925BCF1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA4358A-4CC6-4F46-960A-F29925BCF1A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C0C5C6D-DAEC-4441-A907-C472750D8C74} = {7D6B0ED2-DE56-4D53-AA3A-291FD49D19A5}
+		{FDA4358A-4CC6-4F46-960A-F29925BCF1A1} = {7D6B0ED2-DE56-4D53-AA3A-291FD49D19A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E91DD50-6862-4E82-A760-4C67C8C1A9B8}
