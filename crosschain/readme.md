@@ -1,0 +1,6 @@
+neo_outcallwatcher 是用来监视NEO主链（目前监视的是Testnet）上面的交易包含的Notify的工具
+目前通过Nel 的api进行监控
+
+NEO跨链通讯，主要就是通过这个监控机制对外部进行调用
+
+接下来沿着这条路继续开发即可完成
