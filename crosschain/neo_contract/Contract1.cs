@@ -9,13 +9,13 @@ namespace Nep5_Contract
     public class ContractNeoCross : SmartContract
     {
         //nep5 notify
-        public delegate void deleOutCall(byte[] callscript, string callmethod, byte[] witnessreturn, object[] _params);
+        public delegate void deleOutCall(string tag, byte[] callscript, string callmethod, byte[] witnessreturn, object[] _params);
         [DisplayName("outcall")]
         public static event deleOutCall notifyOutCall;
 
-        public delegate void deleOutCallReturn(byte[] txid, byte[] returnvalue);
+        public delegate void deleOutCallReturn(string tag, byte[] txid, byte[] returnvalue);
         [DisplayName("outcallreturn")]
-        public static event deleOutCallReturn notifyOutcallReturn;
+        public static event deleOutCallReturn notifyOutCallReturn;
 
         public static string Protocol()
         {
@@ -55,7 +55,7 @@ namespace Nep5_Contract
             var data = Neo.SmartContract.Framework.Helper.Serialize(v);
             Storage.Put(Storage.CurrentContext, key, data);
 
-            notifyOutCall(callscript, callmethod, witnessreturn, _params);
+            notifyOutCall("call", callscript, callmethod, witnessreturn, _params);
             return true;
         }
         /// <summary>
@@ -105,6 +105,8 @@ namespace Nep5_Contract
                 s.returnvalue = returnvalue;
                 data = Neo.SmartContract.Framework.Helper.Serialize(s);
                 Storage.Put(Storage.CurrentContext, key, data);
+
+                notifyOutCallReturn("ret", txid, returnvalue);
                 return true;
             }
             return false;
