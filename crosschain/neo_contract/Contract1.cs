@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace Nep5_Contract
 {
-    public class ContractNep5 : SmartContract
+    public class ContractNeoCross : SmartContract
     {
         //nep5 notify
         public delegate void deleOutCall(byte[] callscript, string callmethod, byte[] witnessreturn, object[] _params);
@@ -25,19 +25,19 @@ namespace Nep5_Contract
         public class CallState
         {
             public int state;//1 incall 2 havereturn
-            public byte[] witnesscall;
-            public byte[] witnessreturn;
-
-            public byte[] returnvalue;
+            public byte[] witnesscall;//调用者
+            public byte[] witnessreturn;//返回者
+            public byte[] returnvalue;//返回值
         }
 
         /// <summary>
         /// 发起一个外部调用
         /// </summary>
-        /// <param name="callscript">外部调用的合约ID</param>
-        /// <param name="callmethod">外部调用的方法名</param>
-        /// <param name="witness">外部调用的见证人</param>
-        /// <param name="_params">外部调用的参数</param>
+        /// <param name="witnesscall">发起该调用的人，如果取消调用，要他签名</param>
+        /// <param name="witnessreturn">负责设置这个调用返回值的人，通常是外部系统的地址，私钥在外部系统那</param>
+        /// <param name="callscript">调用的脚本地址</param>
+        /// <param name="callmethod">调用的方法</param>
+        /// <param name="_params">调用的参数</param>
         /// <returns></returns>
         public static bool OutCall(byte[] witnesscall, byte[] witnessreturn, byte[] callscript, string callmethod, object[] _params)
         {
@@ -59,9 +59,9 @@ namespace Nep5_Contract
             return true;
         }
         /// <summary>
-        /// 取消一个外部调用，由用户发起
+        /// 取消一个外部调用，由外部调用的签名用户发起才能成功
         /// </summary>
-        /// <param name="txid"></param>
+        /// <param name="txid">发起该调用的txid</param>
         /// <returns></returns>
         public static bool CancelOutCall(byte[] txid)
         {
@@ -81,6 +81,12 @@ namespace Nep5_Contract
             }
             return false;
         }
+        /// <summary>
+        /// 设置一个外部调用的返回值，由“外部”来设置，需要返回值鉴证人签名
+        /// </summary>
+        /// <param name="txid">发起该调用的txid</param>
+        /// <param name="returnvalue">调用的返回值</param>
+        /// <returns></returns>
         public static bool ReturnValue(byte[] txid, byte[] returnvalue)
         {
             var key = new byte[] { 0x11 }.Concat(txid);
@@ -104,6 +110,11 @@ namespace Nep5_Contract
             return false;
         }
 
+        /// <summary>
+        /// 得到调用状态
+        /// </summary>
+        /// <param name="txid"></param>
+        /// <returns></returns>
         public static CallState GetCallState(byte[] txid)
         {
             var key = new byte[] { 0x11 }.Concat(txid);
