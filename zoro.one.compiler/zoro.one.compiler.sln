@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "neon.src", "neon.src\neon.src.csproj", "{23FE1790-9B56-4BD3-92E0-D275422436E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{877F915B-A394-40A2-9C70-3DF1DEC7B846} = {877F915B-A394-40A2-9C70-3DF1DEC7B846}
+		{E8E3D2E3-FACF-4719-B5C7-431A79EF7914} = {E8E3D2E3-FACF-4719-B5C7-431A79EF7914}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vercopytool", "vercopytool\vercopytool.csproj", "{877F915B-A394-40A2-9C70-3DF1DEC7B846}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neo.SmartContract.Framework", "Neo.SmartContract.Framework\Neo.SmartContract.Framework.csproj", "{E8E3D2E3-FACF-4719-B5C7-431A79EF7914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Cecil.20", "Mono.Cecil.20\Mono.Cecil.20.csproj", "{D3785D8B-4D85-4546-8763-47FC848C13E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Cecil.Pdb", "Mono.Cecil.Pdb\Mono.Cecil.Pdb.csproj", "{CEA7A85F-2523-4AD0-8296-6E8E0A2E6DF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23FE1790-9B56-4BD3-92E0-D275422436E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23FE1790-9B56-4BD3-92E0-D275422436E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23FE1790-9B56-4BD3-92E0-D275422436E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23FE1790-9B56-4BD3-92E0-D275422436E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{877F915B-A394-40A2-9C70-3DF1DEC7B846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{877F915B-A394-40A2-9C70-3DF1DEC7B846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{877F915B-A394-40A2-9C70-3DF1DEC7B846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{877F915B-A394-40A2-9C70-3DF1DEC7B846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E3D2E3-FACF-4719-B5C7-431A79EF7914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E3D2E3-FACF-4719-B5C7-431A79EF7914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E3D2E3-FACF-4719-B5C7-431A79EF7914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E3D2E3-FACF-4719-B5C7-431A79EF7914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3785D8B-4D85-4546-8763-47FC848C13E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3785D8B-4D85-4546-8763-47FC848C13E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3785D8B-4D85-4546-8763-47FC848C13E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3785D8B-4D85-4546-8763-47FC848C13E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA7A85F-2523-4AD0-8296-6E8E0A2E6DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA7A85F-2523-4AD0-8296-6E8E0A2E6DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA7A85F-2523-4AD0-8296-6E8E0A2E6DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA7A85F-2523-4AD0-8296-6E8E0A2E6DF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DCB1FD7-5E34-41CB-8E73-6B49686A6863}
+	EndGlobalSection
+EndGlobal
