@@ -1,0 +1,14 @@
+﻿<Window x:Class="neo_outcaller.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:neo_outcaller"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="408.082" Width="806.164">
+    <Grid>
+        <Button Content="make a outcall" HorizontalAlignment="Left" Margin="37,27,0,0" VerticalAlignment="Top" Width="169" Click="Button_Click"/>
+        <ListBox HorizontalAlignment="Left" Height="323" Margin="239,27,0,0" VerticalAlignment="Top" Width="529"/>
+
+    </Grid>
+</Window>

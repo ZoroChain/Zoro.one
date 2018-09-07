@@ -7,6 +7,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neo_outcallwatcher", "neo_o
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lib_neo_outcall_s", "lib_neo_outcall_s\lib_neo_outcall_s.csproj", "{6090A175-3541-4CC9-B18D-6F33A3A5866A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neo_outcaller", "neo_outcaller\neo_outcaller.csproj", "{D73C2BC1-06A3-4E9F-8F3F-FC060A02557B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "llvm", "llvm\llvm.csproj", "{A94A952B-9ABC-43F1-B77A-1D1C0902000F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "thinneosdk", "thinneosdk", "{390CF4C5-D514-4937-8615-91720E30A5C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "thinSDK_neo", "thinSDK_neo\thinSDK_neo.csproj", "{CF525C89-132E-480F-B773-F14DD58F603B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "thinSDK", "thinSDK\thinSDK.csproj", "{C78B1BF3-7874-4763-B4DF-19F37C973324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neo_contract", "neo_contract\neo_contract.csproj", "{CA318421-35AF-4E48-8D5F-EC096D57E1C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "contract", "contract", "{0F531879-DB68-4E00-AB2B-568AE4B4B8BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +35,35 @@ Global
 		{6090A175-3541-4CC9-B18D-6F33A3A5866A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6090A175-3541-4CC9-B18D-6F33A3A5866A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6090A175-3541-4CC9-B18D-6F33A3A5866A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73C2BC1-06A3-4E9F-8F3F-FC060A02557B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73C2BC1-06A3-4E9F-8F3F-FC060A02557B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73C2BC1-06A3-4E9F-8F3F-FC060A02557B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73C2BC1-06A3-4E9F-8F3F-FC060A02557B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94A952B-9ABC-43F1-B77A-1D1C0902000F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94A952B-9ABC-43F1-B77A-1D1C0902000F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94A952B-9ABC-43F1-B77A-1D1C0902000F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94A952B-9ABC-43F1-B77A-1D1C0902000F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF525C89-132E-480F-B773-F14DD58F603B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF525C89-132E-480F-B773-F14DD58F603B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF525C89-132E-480F-B773-F14DD58F603B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF525C89-132E-480F-B773-F14DD58F603B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C78B1BF3-7874-4763-B4DF-19F37C973324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78B1BF3-7874-4763-B4DF-19F37C973324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78B1BF3-7874-4763-B4DF-19F37C973324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78B1BF3-7874-4763-B4DF-19F37C973324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA318421-35AF-4E48-8D5F-EC096D57E1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA318421-35AF-4E48-8D5F-EC096D57E1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA318421-35AF-4E48-8D5F-EC096D57E1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA318421-35AF-4E48-8D5F-EC096D57E1C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A94A952B-9ABC-43F1-B77A-1D1C0902000F} = {390CF4C5-D514-4937-8615-91720E30A5C3}
+		{CF525C89-132E-480F-B773-F14DD58F603B} = {390CF4C5-D514-4937-8615-91720E30A5C3}
+		{C78B1BF3-7874-4763-B4DF-19F37C973324} = {390CF4C5-D514-4937-8615-91720E30A5C3}
+		{CA318421-35AF-4E48-8D5F-EC096D57E1C5} = {0F531879-DB68-4E00-AB2B-568AE4B4B8BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5842601D-709F-41AF-A119-AD513B3BCB2C}
