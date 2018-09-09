@@ -31,7 +31,7 @@ namespace lib_neo_outcall_s
         public JObject value;
         public override string ToString()
         {
-            return block + " call:" + callcontract + "\r\n    v=" + value.ToString(Newtonsoft.Json.Formatting.None);
+            return block + " call:" + txid + "\r\n    v=" + value.ToString(Newtonsoft.Json.Formatting.None);
         }
     }
     public class watcher
@@ -52,6 +52,8 @@ namespace lib_neo_outcall_s
             var getcounturl = url + "?jsonrpc=2.0&id=1&method=getblock&params=[" + block + ",1]";
             var info = wc.DownloadString(getcounturl);
             var json = Newtonsoft.Json.Linq.JObject.Parse(info);
+            if (info.Contains("result") == false)
+                return null;
             return (JObject)(((JArray)json["result"])[0]);
         }
         static JArray _getNotify(string txid)
@@ -66,6 +68,9 @@ namespace lib_neo_outcall_s
             var getcounturl = url + "?jsonrpc=2.0&id=1&method=getnotify&params=[\"" + txid + "\"]";
             var info = wc.DownloadString(getcounturl);
             var json = Newtonsoft.Json.Linq.JObject.Parse(info);
+            if (json.ContainsKey("result") == false)
+                return null;
+
             var result = (JObject)(((JArray)json["result"])[0]);
             return result["notifications"] as JArray;
 
@@ -99,6 +104,12 @@ namespace lib_neo_outcall_s
             bParse = true;
             parseheight.SetValue(startblock - 1);
         }
+        static System.Collections.Generic.List<string> watchContract = new System.Collections.Generic.List<string>();
+        //ThinNeo.Hash160 contractaddr = new ThinNeo.Hash160("0x24192c2a72e0ce8d069232f345aea4db032faf72");
+        public static void AddWatchContract(string contractHash)
+        {
+            watchContract.Add(contractHash);
+        }
         public static void StartWatcherThread()
         {
             System.Threading.Thread t = new System.Threading.Thread(_thread);
@@ -124,19 +135,23 @@ namespace lib_neo_outcall_s
                 if (bParse)
                 {
                     var next = parseheight.GetValue() + 1;
-                    if (next <= height)
+                    if (next < (height-1))//缓一个块
                     {
-                        _parseHeight(next);
-                        parseheight.SetValue(next);
+                        if (_parseHeight(next))
+                        {
+                            parseheight.SetValue(next);
+                        }
                     }
                 }
 
                 System.Threading.Thread.Sleep(1);
             }
         }
-        static void _parseHeight(int height)
+        static bool _parseHeight(int height)
         {
             var block = _getBlock(height);
+            if (block == null)
+                return false;
             var txs = (JArray)block["tx"];
             foreach (JObject tx in txs)
             {
@@ -145,10 +160,18 @@ namespace lib_neo_outcall_s
                 if (type == "InvocationTransaction")
                 {
                     var notify = _getNotify(txid);
-                    var script = (string)tx["script"];
-                    _parseCall(height, txid, script, notify);
+                    if (notify == null)
+                    {
+
+                    }
+                    else
+                    {
+                        var script = (string)tx["script"];
+                        _parseCall(height, txid, script, notify);
+                    }
                 }
             }
+            return true;
         }
         static string HexStr2String(string src)
         {
@@ -164,6 +187,11 @@ namespace lib_neo_outcall_s
             foreach (JObject n in notify)
             {
                 var contract = (string)n["contract"];
+
+                //过滤 事件太多，只监视关注的合约
+                if (watchContract.Contains(contract) == false)
+                    continue;
+
                 var value = n["state"] as JObject;
                 CallItem item = new CallItem();
                 item.block = height;

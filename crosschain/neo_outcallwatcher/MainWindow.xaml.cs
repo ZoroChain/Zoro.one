@@ -26,12 +26,13 @@ namespace neo_outcallwatcher
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            lib_neo_outcall_s.watcher.StartParse(1000450);
+            lib_neo_outcall_s.watcher.StartParse(int.Parse(txtBlockHeight.Text));
             //list1.Items.Add("height=" + n);
         }
         System.Windows.Threading.DispatcherTimer timer;
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+            lib_neo_outcall_s.watcher.AddWatchContract("0x24192c2a72e0ce8d069232f345aea4db032faf72");
             lib_neo_outcall_s.watcher.StartWatcherThread();
 
 
@@ -42,7 +43,7 @@ namespace neo_outcallwatcher
                   var n = lib_neo_outcall_s.watcher.GetHeight();
                   var np = lib_neo_outcall_s.watcher.GetParseHeight();
                   this.label01.Content = "height=" + n + "   parse height=" + np;
-                  if(lib_neo_outcall_s.watcher.GetCallItemCount()>0)
+                  if (lib_neo_outcall_s.watcher.GetCallItemCount() > 0)
                   {
                       var item = lib_neo_outcall_s.watcher.PickCall();
                       this.list1.Items.Add(item);
