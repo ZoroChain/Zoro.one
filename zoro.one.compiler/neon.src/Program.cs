@@ -1,4 +1,6 @@
-﻿using Neo.Compiler.MSIL;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Neo.Compiler.MSIL;
 using System;
 using System.Reflection;
 using System.Text;
@@ -16,7 +18,18 @@ namespace Neo.Compiler
         //控制台输出约定了特别的语法
         public static void Main(string[] args)
         {
+            var tree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText("class A{public  int aaa(){return 3;}}");
 
+            var op = new CSharpCompilationOptions(Microsoft.CodeAnalysis.OutputKind.DynamicallyLinkedLibrary);
+            var ref1 = MetadataReference.CreateFromFile("needlib\\mscorlib.dll");
+            var comp = Microsoft.CodeAnalysis.CSharp.CSharpCompilation.Create("aaa.dll", new[] { tree },
+               new[] { ref1 }, op);
+
+            var fs = new System.IO.MemoryStream();
+            var fspdb = new System.IO.MemoryStream();
+            var result = comp.Emit(fs,fspdb);
+            fs.Seek(0, System.IO.SeekOrigin.Begin);
+            fspdb.Seek(0, System.IO.SeekOrigin.Begin);
             //set console
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             var log = new DefLogger();
@@ -28,28 +41,28 @@ namespace Neo.Compiler
             }
             string filename = args[0];
             string onlyname = System.IO.Path.GetFileNameWithoutExtension(filename);
-            string filepdb = onlyname + ".pdb";
+            //string filepdb = onlyname + ".pdb";
 
             ILModule mod = new ILModule();
-            System.IO.Stream fs = null;
-            System.IO.Stream fspdb = null;
+            //System.IO.Stream fs = null;
+            //System.IO.Stream fspdb = null;
 
             //open file
-            try
-            {
-                fs = System.IO.File.OpenRead(filename);
+            //try
+            //{
+            //    fs = System.IO.File.OpenRead(filename);
 
-                if (System.IO.File.Exists(filepdb))
-                {
-                    fspdb = System.IO.File.OpenRead(filepdb);
-                }
+            //    if (System.IO.File.Exists(filepdb))
+            //    {
+            //        fspdb = System.IO.File.OpenRead(filepdb);
+            //    }
 
-            }
-            catch (Exception err)
-            {
-                log.Log("Open File Error:" + err.ToString());
-                return;
-            }
+            //}
+            //catch (Exception err)
+            //{
+            //    log.Log("Open File Error:" + err.ToString());
+            //    return;
+            //}
             //load module
             try
             {
