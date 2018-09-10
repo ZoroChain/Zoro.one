@@ -22,13 +22,29 @@ namespace testbson
             var token = Newtonsoft.Json.Linq.JToken.ReadFrom(r);
             Console.WriteLine("Hello World!");
 
-            var tree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText("class A{public  int aaa(){return 3;}}");
+            var tree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText("class A{public  int aaa(){return 3+4;}}");
 
             var op = new CSharpCompilationOptions(Microsoft.CodeAnalysis.OutputKind.DynamicallyLinkedLibrary);
-            var ref1 = MetadataReference.CreateFromFile("needlib\\mscorlib.dll");
+            var ref1 = MetadataReference.CreateFromFile("needlib" + System.IO.Path.DirectorySeparatorChar + "mscorlib.dll");
             var comp = Microsoft.CodeAnalysis.CSharp.CSharpCompilation.Create("aaa.dll", new[] { tree },
                new[] { ref1 }, op);
-            var result = comp.Emit("e:\\111.dll", pdbPath: "e:\\111.pdb");
+            var ms = new System.IO.MemoryStream();
+            var mspdb = new System.IO.MemoryStream();
+            var result = comp.Emit(ms,mspdb);
+            Console.WriteLine("result=" + result.Success);
+            Console.WriteLine("dll=" + ms.Length);
+            Console.WriteLine("pdb=" + mspdb.Length);
+            System.IO.File.WriteAllBytes("111.dll", ms.ToArray());
+            System.IO.File.WriteAllBytes("111.pdb", mspdb.ToArray());
+            foreach (var d in result.Diagnostics)
+            {
+                Console.WriteLine(d.Descriptor.Description.ToString());
+                Console.WriteLine(d.Descriptor.Title.ToString());
+                Console.WriteLine(d.Descriptor.Category);
+                Console.WriteLine(d.Descriptor.MessageFormat.ToString());
+            }
+            Console.WriteLine("rosyln ok.");
+
         }
     }
 }
