@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\mono.cecil\mono.cecil.core.csproj" />
+    <PackageReference Include="mono.cecil.core" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

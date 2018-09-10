@@ -23,7 +23,7 @@ namespace Neo.Compiler.MSIL
     //    }
 
     //}
-    class DefLogger : ILogger
+    public class DefLogger : ILogger
     {
         public void Log(string log)
         {
