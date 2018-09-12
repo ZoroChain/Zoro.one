@@ -26,7 +26,7 @@ namespace neo_outcaller
         {
             InitializeComponent();
         }
-        static string url = "https://api.nel.group/api/testnet";
+        static string url = "http://27.115.95.118:20332";
         [ThreadStatic]
         static System.Net.WebClient wc = new System.Net.WebClient();
         static int _getCount()
@@ -42,9 +42,8 @@ namespace neo_outcaller
             upparam["params"] = new Newtonsoft.Json.Linq.JArray();
 
             var info = wc.UploadString(url, upparam.ToString());
-            var json = Newtonsoft.Json.Linq.JObject.Parse(info);
-            JObject result = (JObject)(((JArray)(json["result"]))[0]);
-            var count = (int)result["blockcount"];
+            var json = Newtonsoft.Json.Linq.JObject.Parse(info);         
+            var count = (int)json["result"];
             return count;
         }
         static void CallScript(byte[] script)

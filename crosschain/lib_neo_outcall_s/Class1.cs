@@ -36,15 +36,15 @@ namespace lib_neo_outcall_s
     }
     public class watcher
     {
-        static string url = "https://api.nel.group/api/testnet";
+        static string url = "http://27.115.95.118:20332";
         static System.Net.WebClient wc = new System.Net.WebClient();
         static int _getCount()
         {
             var getcounturl = url + "?jsonrpc=2.0&id=1&method=getblockcount&params=[]";
             var info = wc.DownloadString(getcounturl);
             var json = Newtonsoft.Json.Linq.JObject.Parse(info);
-            JObject result = (JObject)(((JArray)(json["result"]))[0]);
-            var count = (int)result["blockcount"];
+            
+            var count = (int)json["result"];
             return count;
         }
         static JObject _getBlock(int block)
@@ -54,25 +54,25 @@ namespace lib_neo_outcall_s
             var json = Newtonsoft.Json.Linq.JObject.Parse(info);
             if (info.Contains("result") == false)
                 return null;
-            return (JObject)(((JArray)json["result"])[0]);
+            return (JObject)json["result"];
         }
         static JArray _getNotify(string txid)
         {
             var jobj = new JObject();
             jobj["jsonrpc"] = "2.0";
             jobj["id"] = 1;
-            jobj["method"] = "getnotify";
+            jobj["method"] = "getapplicationlog";
             jobj["params"] = new JArray();
             (jobj["params"] as JArray).Add(txid);
 
-            var getcounturl = url + "?jsonrpc=2.0&id=1&method=getnotify&params=[\"" + txid + "\"]";
+            var getcounturl = url + "?jsonrpc=2.0&id=1&method=getapplicationlog&params=[\"" + txid + "\"]";
             var info = wc.DownloadString(getcounturl);
             var json = Newtonsoft.Json.Linq.JObject.Parse(info);
             if (json.ContainsKey("result") == false)
                 return null;
-
-            var result = (JObject)(((JArray)json["result"])[0]);
-            return result["notifications"] as JArray;
+            var ss = json["result"]["notifications"] as JArray;
+            //var result = (JObject)(((JArray)json["result"])[0]);
+            return json["result"]["notifications"] as JArray;
 
         }
         static ThreadSafe<int> nowheight = new ThreadSafe<int>();
