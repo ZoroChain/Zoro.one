@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:neo_outcallwatcher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Loaded="Grid_Loaded">
+        Title="GetNotify" Height="626" Width="1086">
+    <Grid Loaded="Grid_Loaded" Margin="0,0,-18,-178" HorizontalAlignment="Left" Width="1096" Height="597" VerticalAlignment="Top">
         <Button Content="Start Parse from" HorizontalAlignment="Left" Margin="38,13,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click" Height="22"/>
-        <ListBox x:Name="list1" HorizontalAlignment="Left" Height="341" Margin="10,68,0,0" VerticalAlignment="Top" Width="755"/>
-        <Label x:Name="label01" Content="Label" HorizontalAlignment="Left" Margin="231,10,0,0" VerticalAlignment="Top" Width="446"/>
-        <TextBox x:Name="txtBlockHeight" HorizontalAlignment="Left" Height="23" Margin="103,40,0,0" TextWrapping="Wrap" Text="1792499" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="list1" HorizontalAlignment="Left" Height="519" Margin="10,68,0,0" VerticalAlignment="Top" Width="1048" SelectionChanged="list1_SelectionChanged"/>
+        <Label x:Name="label01" Content="Label" HorizontalAlignment="Left" Margin="406,13,0,0" VerticalAlignment="Top" Width="446"/>
+        <TextBox x:Name="txtBlockHeight" HorizontalAlignment="Left" Height="23" Margin="186,13,0,0" TextWrapping="Wrap" Text="1805700" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:neo_outcaller"
         mc:Ignorable="d"
-        Title="MainWindow" Height="408.082" Width="806.164" Loaded="Window_Loaded">
-    <Grid>
+        Title="CallTest" Height="480.852" Width="1122.927" Loaded="Window_Loaded">
+    <Grid RenderTransformOrigin="0.549,0.539" Margin="0,0,101,11">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110*"/>
             <ColumnDefinition Width="289*"/>
         </Grid.ColumnDefinitions>
         <Button Content="make a outcall" HorizontalAlignment="Left" Margin="37,27,0,0" VerticalAlignment="Top" Width="169" Click="Button_Click"/>
-        <ListBox x:Name="list1" Margin="0" Grid.Column="1"/>
+        <ListBox x:Name="list1" Margin="0,0,-13,24" Grid.Column="1"/>
 
     </Grid>
 </Window>

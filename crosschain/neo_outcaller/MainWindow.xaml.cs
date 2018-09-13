@@ -201,5 +201,14 @@ namespace neo_outcaller
             }
         }
 
+        private void list1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        
+        }
+
+        private void list1_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

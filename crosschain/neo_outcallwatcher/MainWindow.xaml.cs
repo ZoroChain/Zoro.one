@@ -51,5 +51,10 @@ namespace neo_outcallwatcher
               };
             timer.Start();
         }
+
+        private void list1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
