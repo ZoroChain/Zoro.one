@@ -46,7 +46,7 @@ namespace neo_outcaller
             var count = (int)json["result"];
             return count;
         }
-        static void CallScript(byte[] script)
+        static JArray CallScript(byte[] script)
         {
             if (wc == null)
                 wc = new System.Net.WebClient();
@@ -60,7 +60,9 @@ namespace neo_outcaller
             upparam["params"] = _params;
 
             var info = wc.UploadString(url, upparam.ToString());
-            Console.WriteLine(info);
+            var result = JObject.Parse(info)["result"]["stack"] as JArray;
+            return result;
+            //Console.WriteLine(info);
 
         }
         class State
@@ -169,7 +171,7 @@ namespace neo_outcaller
 
             foreach (var item in mapTxState)
             {
-                this.list1.Items.Add(item);
+                this.list1.Items.Add(item + item.Value.state.ToString());
             }
 
         }
@@ -191,7 +193,9 @@ namespace neo_outcaller
                     ThinNeo.Hash160 contractaddr = new ThinNeo.Hash160("0x24192c2a72e0ce8d069232f345aea4db032faf72");
                     sb.EmitAppCall(contractaddr);
                     var script = sb.ToArray();
-                    CallScript(script);
+                    var result = CallScript(script);
+                    if (!string.IsNullOrEmpty(result[0]["value"].ToString()))
+                        item.Value.state = (int) result[0]["value"][0]["value"];
                 }
                 System.Threading.Thread.Sleep(1000);
             }
