@@ -1,4 +1,4 @@
-## 实现
+## 设计
 
 * 实现原理：<br>
  NEO的nep5转账交易可以产生notify，ZoroChain可以通过观察notify得到NEO链的信息；
@@ -23,3 +23,15 @@ ZoroChain 捕获到交易A 对应的 返回结果 notify 后，在rootchain上�
 对于NEO端来说，他会看到两笔invoke交易，一笔用于向zorochain传递参数（输出notify的交易），一笔得到zorochain的执行结果（通知调用的返回结果）。
 
 对于ZoroChain端来说，他也会看到两笔交易，一笔传递参数（在rootchain上发起交易的交易），一笔显示结果（通知调用的返回结果）<br>
+
+## 实现
+### Demo说明
+#### 外部监测
+* 从指定高度开始、读取每个区块，使用getblock接口；
+* 获取区块中每个txid的notifications，使用getapplicationlog接口，没有notifications的忽略；
+* 解析每条notifications，只关注contract为目标合约hash的notifications；
+* 得到目标合约的notify的type和value。
+
+#### 外部call
+* 建立通信：发起调用目标合约的一笔交易并签名；调用合约outcall方法、交易执行后callstate=1；
+* 根据上一步的txid、用合约的getcallstate方法检查callstate；这一步用invokescript；
