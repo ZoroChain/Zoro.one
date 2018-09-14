@@ -25,6 +25,10 @@ namespace neo_outcaller
         public MainWindow()
         {
             InitializeComponent();
+            List<string> methodList = new List<string>();
+            methodList.Add("add");
+            methodList.Add("multiply");
+            this.methodCombox.ItemsSource = methodList;
         }
         static string url = "http://27.115.95.118:20332";
         [ThreadStatic]
@@ -121,11 +125,13 @@ namespace neo_outcaller
             var sb = new ThinNeo.ScriptBuilder();
 
             MyJson.JsonNode_Array array = new MyJson.JsonNode_Array();
-            array.AddArrayValue("(hex160)"+scripthash.ToString());//witnesscall
+            array.AddArrayValue("(hex160)" + scripthash.ToString());//witnesscall
             array.AddArrayValue("(hex160)" + scripthash.ToString());//witnessreturn
             array.AddArrayValue("(hex160)" + scripthash.ToString());//callscript
-            array.AddArrayValue("(str)anything");//callmethod
+            array.AddArrayValue("(str)" + methodCombox.Text);//callmethod
             var _params = new MyJson.JsonNode_Array();
+            _params.AddArrayValue(int.Parse(textbox1.Text));
+            _params.AddArrayValue(int.Parse(textbox2.Text));
             array.Add(_params);//params
             _params.AddArrayValue("(int)" + r.Next());
 
@@ -199,16 +205,7 @@ namespace neo_outcaller
                 }
                 System.Threading.Thread.Sleep(1000);
             }
-        }
-
-        private void list1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        } 
         
-        }
-
-        private void list1_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

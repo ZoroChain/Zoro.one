@@ -8,9 +8,14 @@
         Title="GetNotify" Height="626" Width="1086">
     <Grid Loaded="Grid_Loaded" Margin="0,0,-18,-178" HorizontalAlignment="Left" Width="1096" Height="597" VerticalAlignment="Top">
         <Button Content="Start Parse from" HorizontalAlignment="Left" Margin="38,13,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click" Height="22"/>
-        <ListBox x:Name="list1" HorizontalAlignment="Left" Height="519" Margin="10,68,0,0" VerticalAlignment="Top" Width="1048" SelectionChanged="list1_SelectionChanged"/>
-        <Label x:Name="label01" Content="Label" HorizontalAlignment="Left" Margin="406,13,0,0" VerticalAlignment="Top" Width="446"/>
-        <TextBox x:Name="txtBlockHeight" HorizontalAlignment="Left" Height="23" Margin="186,13,0,0" TextWrapping="Wrap" Text="1805700" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="list1" HorizontalAlignment="Left" Height="496" Margin="10,80,0,0" VerticalAlignment="Top" Width="330"/>
+        <Label x:Name="label01" Content="Label" HorizontalAlignment="Left" Margin="320,13,0,0" VerticalAlignment="Top" Width="446"/>
+        <TextBox x:Name="txtBlockHeight" HorizontalAlignment="Left" Height="23" Margin="186,13,0,0" TextWrapping="Wrap" Text="1809300" VerticalAlignment="Top" Width="120"/>
+        <Label Content="outcall's notify" HorizontalAlignment="Left" Margin="83,45,0,0" VerticalAlignment="Top" Width="197" FontSize="20"/>
+        <ListBox x:Name="list2" HorizontalAlignment="Left" Height="496" Margin="383,79,0,0" VerticalAlignment="Top" Width="285"/>
+        <Label Content="outcall's return" HorizontalAlignment="Left" Margin="435,45,0,0" VerticalAlignment="Top" Width="197" FontSize="20"/>
+        <ListBox x:Name="list3" HorizontalAlignment="Left" Height="496" Margin="732,79,0,0" VerticalAlignment="Top" Width="326"/>
+        <Label Content="return's notify" HorizontalAlignment="Left" Margin="795,44,0,0" VerticalAlignment="Top" Width="197" FontSize="20"/>
 
     </Grid>
 </Window>

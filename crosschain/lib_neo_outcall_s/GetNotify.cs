@@ -93,6 +93,7 @@ namespace lib_neo_outcall_s
             return callitem.Count;
         }
         static System.Collections.Concurrent.ConcurrentQueue<CallItem> callitem = new System.Collections.Concurrent.ConcurrentQueue<CallItem>();
+
         public static CallItem PickCall()
         {
             CallItem outi = null;
@@ -157,6 +158,7 @@ namespace lib_neo_outcall_s
             foreach (JObject tx in txs)
             {
                 var txid = (string)tx["txid"];
+                
                 var type = (string)tx["type"];
                 if (type == "InvocationTransaction")
                 {

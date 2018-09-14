@@ -102,6 +102,14 @@
       <Project>{6090a175-3541-4cc9-b18d-6f33a3a5866a}</Project>
       <Name>lib_neo_outcall_s</Name>
     </ProjectReference>
+    <ProjectReference Include="..\thinSDK\thinSDK.csproj">
+      <Project>{c78b1bf3-7874-4763-b4df-19f37c973324}</Project>
+      <Name>thinSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\thinSDK_neo\thinSDK_neo.csproj">
+      <Project>{cf525c89-132e-480f-b773-f14dd58f603b}</Project>
+      <Name>thinSDK_neo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

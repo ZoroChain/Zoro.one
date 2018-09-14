@@ -8,11 +8,18 @@
         Title="CallTest" Height="480.852" Width="1122.927" Loaded="Window_Loaded">
     <Grid RenderTransformOrigin="0.549,0.539" Margin="0,0,101,11">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110*"/>
-            <ColumnDefinition Width="289*"/>
+            <ColumnDefinition Width="280*"/>
+            <ColumnDefinition Width="411*"/>
+            <ColumnDefinition Width="323*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="make a outcall" HorizontalAlignment="Left" Margin="37,27,0,0" VerticalAlignment="Top" Width="169" Click="Button_Click"/>
-        <ListBox x:Name="list1" Margin="0,0,-13,24" Grid.Column="1"/>
+        <Button Content="make a outcall" HorizontalAlignment="Left" Margin="64,211,0,0" VerticalAlignment="Top" Width="169" Click="Button_Click"/>
+        <ListBox x:Name="list1" Margin="0,0,-13,0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="23" Margin="130,116,0,0" TextWrapping="Wrap" Text="int" VerticalAlignment="Top" Width="103"/>
+        <Label Content="parame1" HorizontalAlignment="Left" Margin="64,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="parame2" HorizontalAlignment="Left" Margin="64,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.525,2.16"/>
+        <TextBox x:Name="textbox2" HorizontalAlignment="Left" Height="23" Margin="130,150,0,0" TextWrapping="Wrap" Text="int" VerticalAlignment="Top" Width="103"/>
+        <ComboBox x:Name="methodCombox" HorizontalAlignment="Left" Margin="130,78,0,0" VerticalAlignment="Top" Width="103" AllowDrop="True"/>
+        <Label Content="method" HorizontalAlignment="Left" Margin="64,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.525,2.16"/>
 
     </Grid>
 </Window>
