@@ -1,107 +1,104 @@
 ﻿using System;
 using System.Security.Cryptography;
+using LevelDB;
+using LevelDB.Ex;
+using System.Threading;
+using System.IO;
+using System.Text;
 
 namespace zoro.one.chain
 {
-    public class BlockChain
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BlockChain : IBlockChain
     {
-        LevelDB.DB db = null;
-        LevelDB.Ex.Table dbTable = null;
-        byte[] blockChainMagic = null;
-        public void Start(string dbPath, byte[] magic)
-        {
-            var curlibVersion = this.GetType().Assembly.GetName().Version;
-            Console.WriteLine("zoro.one V" + curlibVersion);
+        private DB db = null;
+        private byte[] tablename = null;
+        private Table table = null;
 
-            db = LevelDB.Ex.Helper.OpenDB(dbPath);
-
-            this.blockChainMagic = magic;
-
-            dbTable = new LevelDB.Ex.Table(db, magic);
-
-            InitBlock();
-            System.Threading.Thread t = new System.Threading.Thread(TimerThread);
-            t.IsBackground = true;//设置为后台线程，主程序退出这个线程就会玩完儿了，不用特别管他
-            t.Start();
-        }
-        void TimerThread()
-        {
-            while(true)
+        public BlockChain(string dbPath, byte[] magic) {
+            try
             {
-                System.Threading.Thread.Sleep(500);
-                Tick();
+                if (!File.Exists(dbPath))
+                {
+                    Console.WriteLine("Database not found. {0}", dbPath);
+                    throw new Exception(String.Format("Database not found. {0}", dbPath));
+                }
+
+                if (magic == null || magic.Length == 0)
+                {
+                    throw new Exception(String.Format("Illegal table name. {0}", magic));
+                }
+
+                this.db = Helper.OpenDB(dbPath);
+                this.tablename = magic;
+
+                this.table = new Table(this.db, this.tablename);
+
+                this.InitBlock();
+
+                ThreadStart threadDelegate = new ThreadStart(TimerThread.Run);
+                Thread thread = new Thread(threadDelegate);
+                thread.IsBackground = true; // 设置为后台线程，主程序退出这个线程就会玩完儿了，不用特别管他
+                thread.Start();
+
+                Console.WriteLine("Zoro.One Version: {0}", this.GetType().Assembly.GetName().Version);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw ex;
+            }
+            finally
+            {
+                if (this.db != null)
+                {
+                    this.db.Dispose();
+                }
             }
         }
-        void Tick()
-        {
-            _Test_Add();
-        }
 
-        SHA256 sha256 = SHA256.Create();
-        void InitBlock()
+        public void InitBlock()
         {
-            var snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
-            byte[] key = System.Text.Encoding.ASCII.GetBytes("allblocks");
-            var blocks = dbTable.GetItem(snapshot, key) as LevelDB.Ex.Map;
+            var snapshot = Helper.CreateSnapshot(db);
+            byte[] key =Encoding.ASCII.GetBytes("allblocks");
+            var blocks = table.GetItem(snapshot, key) as LevelDB.Ex.Map;
             if (blocks == null)
             {
-                blocks = new LevelDB.Ex.Map();
-                dbTable.PutItem(key, blocks);
+                blocks = new Map();
+                table.PutItem(key, blocks);
             }
-            snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
+            snapshot = Helper.CreateSnapshot(db);
             if (blocks.Count(snapshot) == 0)
             {
                 var batch = new LevelDB.Ex.WriteBatch(db);
                 //写入创世块
-                var blockzero = new LevelDB.Ex.Map();
+                var blockzero = new Map();
                 byte[] blockkey = BitConverter.GetBytes((UInt64)0);
                 blocks.Batch_SetItem(batch, blockkey, blockzero);
 
-                byte[] keydata = System.Text.Encoding.ASCII.GetBytes("data");
-                blockzero.Batch_SetItem(batch, keydata, new LevelDB.Ex.Bytes(new byte[0]));
+                byte[] keydata = Encoding.ASCII.GetBytes("data");
+                blockzero.Batch_SetItem(batch, keydata, new Bytes(new byte[0]));
 
-                byte[] keyhash = System.Text.Encoding.ASCII.GetBytes("hash");
+                byte[] keyhash =Encoding.ASCII.GetBytes("hash");
 
-                byte[] hash = sha256.ComputeHash(new byte[0]);
-                blockzero.Batch_SetItem(batch, keyhash, new LevelDB.Ex.Bytes(hash));
+                byte[] hash = SHA256.Create().ComputeHash(new byte[0]);
+                blockzero.Batch_SetItem(batch, keyhash, new Bytes(hash));
 
                 batch.Apply();
             }
         }
         public ulong GetBlockCount()
         {
-            var snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
-            byte[] key = System.Text.Encoding.ASCII.GetBytes("allblocks");
-            var blocks = dbTable.GetItem(snapshot, key) as LevelDB.Ex.Map;
+            var snapshot = Helper.CreateSnapshot(db);
+            byte[] key =Encoding.ASCII.GetBytes("allblocks");
+            var blocks = table.GetItem(snapshot, key) as Map;
             if (blocks == null)
             {
                 return 0;
             }
             return blocks.Count(snapshot);
-        }
-        public void _Test_Add()
-        {
-            var snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
-            byte[] key = System.Text.Encoding.ASCII.GetBytes("allblocks");
-            var blocks = dbTable.GetItem(snapshot, key) as LevelDB.Ex.Map;
-            var blockcount = blocks.Count(snapshot);
-            {
-                var batch = new LevelDB.Ex.WriteBatch(db);
-                //写入创世块
-                var blockadd = new LevelDB.Ex.Map();
-                byte[] blockkey = BitConverter.GetBytes((UInt64)blockcount);
-                blocks.Batch_SetItem(batch, blockkey, blockadd);
-
-                byte[] keydata = System.Text.Encoding.ASCII.GetBytes("data");
-                blockadd.Batch_SetItem(batch, keydata, new LevelDB.Ex.Bytes(new byte[0]));
-
-                byte[] keyhash = System.Text.Encoding.ASCII.GetBytes("hash");
-
-                byte[] hash = sha256.ComputeHash(new byte[0]);
-                blockadd.Batch_SetItem(batch, keyhash, new LevelDB.Ex.Bytes(hash));
-
-                batch.Apply();
-            }
         }
     }
 }

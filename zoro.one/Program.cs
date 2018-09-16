@@ -1,10 +1,11 @@
 ﻿using System;
+using zoro.one.chain;
 
 namespace zoro.one
 {
     class Program
     {
-        static zoro.one.chain.BlockChain blockChain = new chain.BlockChain();
+        static IBlockChain blockChain = new BlockChain();
         static zoro.one.httpserver.httpserver http = new one.httpserver.httpserver();
         static bool bExit = false;
         static void Main(string[] args)
