@@ -112,7 +112,7 @@ namespace neo_outcaller
             tx.outputs = new ThinNeo.TransactionOutput[0];
             tx.type = ThinNeo.TransactionType.InvocationTransaction;
             tx.version = 1;
-            //附加一个见证人
+            //附加一个见证人  ///要他签名
             tx.attributes = new ThinNeo.Attribute[1];
             tx.attributes[0] = new ThinNeo.Attribute();
             tx.attributes[0].usage = ThinNeo.TransactionAttributeUsage.Script;
@@ -135,14 +135,13 @@ namespace neo_outcaller
             array.Add(_params);//params
             _params.AddArrayValue("(int)" + r.Next());
 
-
             sb.EmitParamJson(array);
             sb.EmitPushString("outcall");
             ThinNeo.Hash160 contractaddr = new ThinNeo.Hash160("0x24192c2a72e0ce8d069232f345aea4db032faf72");
             sb.EmitAppCall(contractaddr);
             invokedata.script = sb.ToArray();
 
-            //签名
+            //签名（谁签名）
             var msg = tx.GetMessage();
             var data = ThinNeo.Helper.Sign(msg, prikey);
             tx.AddWitness(data, pubkey, addres);

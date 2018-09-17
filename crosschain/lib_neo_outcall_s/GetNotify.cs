@@ -32,7 +32,7 @@ namespace lib_neo_outcall_s
         public override string ToString()
         {
             return "block:" + block + " call-txid:" + txid + "\r\n contract:" + callcontract +
-                   "\r\n  state:" + value.ToString(Newtonsoft.Json.Formatting.None);
+                   "\r\n  notify state:" + value.ToString(Newtonsoft.Json.Formatting.None);
         }
     }
     public class watcher

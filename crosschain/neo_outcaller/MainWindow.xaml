@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:neo_outcaller"
         mc:Ignorable="d"
-        Title="CallTest" Height="480.852" Width="1122.927" Loaded="Window_Loaded">
+        Title="OutCall" Height="480.852" Width="1122.927" Loaded="Window_Loaded">
     <Grid RenderTransformOrigin="0.549,0.539" Margin="0,0,101,11">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280*"/>
