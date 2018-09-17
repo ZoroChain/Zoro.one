@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Security.Cryptography;
-using LevelDB;
-using LevelDB.Ex;
 using System.Threading;
 using System.IO;
 using System.Text;
@@ -13,9 +11,9 @@ namespace zoro.one.chain
     /// </summary>
     public class BlockChain : IBlockChain
     {
-        private DB db = null;
+        private LevelDB.DB db = null;
         private byte[] tablename = null;
-        private Table table = null;
+        private LevelDB.Ex.Table table = null;
 
         public BlockChain(string dbPath, byte[] magic) {
             try
@@ -31,10 +29,10 @@ namespace zoro.one.chain
                     throw new Exception(String.Format("Illegal table name. {0}", magic));
                 }
 
-                this.db = Helper.OpenDB(dbPath);
+                this.db = LevelDB.Ex.Helper.OpenDB(dbPath);
                 this.tablename = magic;
 
-                this.table = new Table(this.db, this.tablename);
+                this.table = new LevelDB.Ex.Table(this.db, this.tablename);
 
                 this.InitBlock();
 
@@ -61,39 +59,39 @@ namespace zoro.one.chain
 
         public void InitBlock()
         {
-            var snapshot = Helper.CreateSnapshot(db);
+            var snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
             byte[] key =Encoding.ASCII.GetBytes("allblocks");
             var blocks = table.GetItem(snapshot, key) as LevelDB.Ex.Map;
             if (blocks == null)
             {
-                blocks = new Map();
+                blocks = new LevelDB.Ex.Map();
                 table.PutItem(key, blocks);
             }
-            snapshot = Helper.CreateSnapshot(db);
+            snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
             if (blocks.Count(snapshot) == 0)
             {
                 var batch = new LevelDB.Ex.WriteBatch(db);
                 //写入创世块
-                var blockzero = new Map();
+                var blockzero = new LevelDB.Ex.Map();
                 byte[] blockkey = BitConverter.GetBytes((UInt64)0);
                 blocks.Batch_SetItem(batch, blockkey, blockzero);
 
                 byte[] keydata = Encoding.ASCII.GetBytes("data");
-                blockzero.Batch_SetItem(batch, keydata, new Bytes(new byte[0]));
+                blockzero.Batch_SetItem(batch, keydata, new LevelDB.Ex.Bytes(new byte[0]));
 
                 byte[] keyhash =Encoding.ASCII.GetBytes("hash");
 
                 byte[] hash = SHA256.Create().ComputeHash(new byte[0]);
-                blockzero.Batch_SetItem(batch, keyhash, new Bytes(hash));
+                blockzero.Batch_SetItem(batch, keyhash, new LevelDB.Ex.Bytes(hash));
 
                 batch.Apply();
             }
         }
         public ulong GetBlockCount()
         {
-            var snapshot = Helper.CreateSnapshot(db);
+            var snapshot = LevelDB.Ex.Helper.CreateSnapshot(db);
             byte[] key =Encoding.ASCII.GetBytes("allblocks");
-            var blocks = table.GetItem(snapshot, key) as Map;
+            var blocks = table.GetItem(snapshot, key) as LevelDB.Ex.Map;
             if (blocks == null)
             {
                 return 0;
