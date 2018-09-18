@@ -110,7 +110,7 @@ namespace neo_outcallwatcher
 
         private void SendReturn(string txid, ReturnInfo ret)
         {
-            var prikey = ThinNeo.Helper.GetPrivateKeyFromWIF("L1WHHa4zmudqzRTYQiF4wbw9duiqEvcz7QY93GG1rzvCVxFVSDud");
+            var prikey = ThinNeo.Helper.GetPrivateKeyFromWIF("");
             var pubkey = ThinNeo.Helper.GetPublicKeyFromPrivateKey(prikey);
             var scripthash = ThinNeo.Helper.GetScriptHashFromPublicKey(pubkey);
             var addres = ThinNeo.Helper.GetAddressFromScriptHash(scripthash);

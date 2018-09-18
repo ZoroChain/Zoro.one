@@ -100,12 +100,16 @@ namespace neo_outcaller
         Random r = new Random();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var prikey = ThinNeo.Helper.GetPrivateKeyFromWIF("L2CmHCqgeNHL1i9XFhTLzUXsdr5LGjag4d56YY98FqEi4j5d83Mv");
-
+            var prikey = ThinNeo.Helper.GetPrivateKeyFromWIF("");
             var pubkey = ThinNeo.Helper.GetPublicKeyFromPrivateKey(prikey);
             var scripthash = ThinNeo.Helper.GetScriptHashFromPublicKey(pubkey);
             var addres = ThinNeo.Helper.GetAddressFromScriptHash(scripthash);
 
+            var vptikey = ThinNeo.Helper.GetPrivateKeyFromWIF("");
+            var vpubkey = ThinNeo.Helper.GetPublicKeyFromPrivateKey(vptikey);
+            var vscripthash = ThinNeo.Helper.GetScriptHashFromPublicKey(vpubkey);
+            var testscripthash = ThinNeo.Helper.GetPublicKeyHashFromAddress(addres);
+            
 
             ThinNeo.Transaction tx = new ThinNeo.Transaction();
             tx.inputs = new ThinNeo.TransactionInput[0];
@@ -126,8 +130,8 @@ namespace neo_outcaller
 
             MyJson.JsonNode_Array array = new MyJson.JsonNode_Array();
             array.AddArrayValue("(hex160)" + scripthash.ToString());//witnesscall
-            array.AddArrayValue("(hex160)" + scripthash.ToString());//witnessreturn
-            array.AddArrayValue("(hex160)" + scripthash.ToString());//callscript
+            array.AddArrayValue("(hex160)" + vscripthash.ToString());//witnessreturn
+            array.AddArrayValue("(str)" + "hello!");//callscript
             array.AddArrayValue("(str)" + methodCombox.Text);//callmethod
             var _params = new MyJson.JsonNode_Array();
             _params.AddArrayValue(int.Parse(textbox1.Text));
@@ -176,7 +180,7 @@ namespace neo_outcaller
 
             foreach (var item in mapTxState)
             {
-                this.list1.Items.Add(item + item.Value.state.ToString());
+                this.list1.Items.Add(" CallState: " + item.Value.state.ToString());
             }
 
         }
