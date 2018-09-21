@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "etwatch", "etwatch\etwatch.csproj", "{E8327E0F-A871-4401-BB39-BA2C4C89B020}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "etwatch", "etwatch\etwatch.csproj", "{E8327E0F-A871-4401-BB39-BA2C4C89B020}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{53F7766F-8671-468F-B144-E2B1F35B7D97}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
