@@ -34,3 +34,8 @@ ZoroChain 捕获到交易 A 对应的 返回结果 notify 后，在 rootchain �
 #### 外部 call
 * 建立通信：发起调用目标合约的一笔交易并签名；调用合约 outcall 方法、交易执行后 callstate=1；
 * 根据上一步的 txid、用合约的 getcallstate 方法检查 callstate；这一步用 invokescript；
+
+
+#### 图示
+
+![](跨链.png)

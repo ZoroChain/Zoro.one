@@ -100,17 +100,14 @@ namespace neo_outcaller
         Random r = new Random();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var prikey = ThinNeo.Helper.GetPrivateKeyFromWIF("");
+            var prikey = ThinNeo.Helper.GetPrivateKeyFromWIF("L1WHHa4zmudqzRTYQiF4wbw9duiqEvcz7QY93GG1rzvCVxFVSDud");
             var pubkey = ThinNeo.Helper.GetPublicKeyFromPrivateKey(prikey);
             var scripthash = ThinNeo.Helper.GetScriptHashFromPublicKey(pubkey);
             var addres = ThinNeo.Helper.GetAddressFromScriptHash(scripthash);
 
-            var vptikey = ThinNeo.Helper.GetPrivateKeyFromWIF("");
-            var vpubkey = ThinNeo.Helper.GetPublicKeyFromPrivateKey(vptikey);
-            var vscripthash = ThinNeo.Helper.GetScriptHashFromPublicKey(vpubkey);
-            var testscripthash = ThinNeo.Helper.GetPublicKeyHashFromAddress(addres);
+            //AbN2K2trYzgx8WMg2H7U7JHH6RQVzz2fnx
+            var vscripthash = ThinNeo.Helper.GetPublicKeyHashFromAddress("AdsNmzKPPG7HfmQpacZ4ixbv9XJHJs2ACz");
             
-
             ThinNeo.Transaction tx = new ThinNeo.Transaction();
             tx.inputs = new ThinNeo.TransactionInput[0];
             tx.outputs = new ThinNeo.TransactionOutput[0];
@@ -131,7 +128,7 @@ namespace neo_outcaller
             MyJson.JsonNode_Array array = new MyJson.JsonNode_Array();
             array.AddArrayValue("(hex160)" + scripthash.ToString());//witnesscall
             array.AddArrayValue("(hex160)" + vscripthash.ToString());//witnessreturn
-            array.AddArrayValue("(str)" + "hello!");//callscript
+            array.AddArrayValue("(str)" + vscripthash.ToString());//callscript
             array.AddArrayValue("(str)" + methodCombox.Text);//callmethod
             var _params = new MyJson.JsonNode_Array();
             _params.AddArrayValue(int.Parse(textbox1.Text));
