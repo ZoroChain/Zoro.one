@@ -14,6 +14,7 @@ namespace etwatch
             {
                 System.Threading.Thread.Sleep(1);
             }
+            Console.ReadKey();
         }
         async static void SyncMain(string[] args)
         {
