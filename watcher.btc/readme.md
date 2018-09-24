@@ -8,18 +8,25 @@ bitcoin core 是目前最常用的客户端
 
 bitcoin直接提供 正式网 和 testnet 两个网络
 
-C:\Program Files\Bitcoin>bitcoin-qt 启动
-C:\Program Files\Bitcoin>bitcoin-qt -testnet 启动测试网
+	C:\Program Files\Bitcoin>bitcoin-qt 启动
+
+	C:\Program Files\Bitcoin>bitcoin-qt -testnet 启动测试网
 
 bitcoin 客户端提供了rpc机制
 
 使用如下命令开启
-C:\Program Files\Bitcoin>bitcoin-qt -server -rest -testnet -rpcuser=1 -rpcpassword=1
--server 是打开服务器，必选
--rest 是允许公共连接 但公共连接能取到的信息太少，不足以监视网络，可以不开
--testnet 表示打开测试网络，此时默认rpc端口为18332 ，不开测试网络，则默认rpc端口为8332
--rpcuser 配置rpc连接用户名 必选
--rpcpassword 配置rpc连接密码 必选
+
+	C:\Program Files\Bitcoin>bitcoin-qt -server -rest -testnet -rpcuser=1 -rpcpassword=1
+
+	-server 是打开服务器，必选
+
+	-rest 是允许公共连接 但公共连接能取到的信息太少，不足以监视网络，可以不开
+
+	-testnet 表示打开测试网络，此时默认rpc端口为18332 ，不开测试网络，则默认rpc端口为8332
+
+	-rpcuser 配置rpc连接用户名 必选
+
+	-rpcpassword 配置rpc连接密码 必选
 
 
 2.测试程序说明
