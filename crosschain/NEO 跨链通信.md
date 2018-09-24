@@ -1,16 +1,17 @@
 # NEO 跨链通信
 ## 通信
-通信是什么？无非就是信息的传递。一般是：一方发送信息，另一方接收信息；一方暴露出信息，一方主动获取（监听）信息。无论是什么方式，都是一方产生信息，另一方得到信息；一个完善的通信过程都需要发送回执，即接收信息后的确认。
-## Nep5
-nep5 提案描述了neo 区块链的 token 标准，它为 token 类的智能合约提供了系统的通用交互机制，定义了这种机制和每种特性，并提供了开发模板和示例。
-## NEO 智能合约
+通信是什么？无非就是信息的传递。一般是一方主动发送信息，另一方接收信息；一方暴露出信息，一方主动获取（监听）信息。
 
+## NEO 智能合约
+基于通信的本质，NEO 的跨链通讯可以使用智能合约来实现，大体思路是用智能合约实现暴露信息的接口和接收信息的接口，由于 NEO 不会主动向外发送信息，所以需要一种方式使得 NEO 能产生出信息，外部来主动获取，产生信息可以使用 NEO 的 log 机制、也就是 notifications（Notify）来实现。
 
 ### notifications（Notify）
-区块链上记录的只有交易、智能合约的部署和调用也是通过发送交易来实现，所以要通过 NEO 区块链得到交易以外的信息，就需要用到一些附加操作。比如智能合约的运行可以产生 log，即 notifications，也叫作 notify，nep5 类型资产转账交易都会默认产生 notifications，因为 nep5 中统一实现的 token 资产转账方法 transfer 会执行产生 notifications 的方法。除了 nep5 资产转账以外，其他调用合约的时候也可以产生 notifications，只要在智能合约中执行了输出 notifications 的方法，就会产生相应的 notifications。
+区块链上记录的只有交易、智能合约的部署和调用也是通过发送交易来实现，所以要通过 NEO 区块链得到交易以外的信息，就需要用到一些附加操作。比如智能合约的运行可以产生 log，即 notifications，也叫作 notify，nep5 类型资产转账交易都会默认产生 notifications，因为 nep5 中的 token 资产转账方法 transfer 默认实现了产生 notifications 的方法。除了 nep5 资产转账以外，其他调用合约的时候也可以产生 notifications，只需要在智能合约中增加产生 notifications 的方法即可。
 ### 获取 notifications
-那么 notifications 保存在哪里呢？如何获取到它呢？
-首先，notifications 不保存在区块链上，它只有在智能合约执行到产生 notifications 的语句时会输出，在使用 cli 节点时，cli 节点在同步区块数据时会将所有智能合约相关的操作在智能合约虚拟机 neo-vm 中运行一次，合约的状态等信息就是在运行过程中推出来的。在启动 cli 节点时，如果打开了 --log 命令，节点在运行每个区块块中的智能合约相关操作时，会将输出的 notifications 保存到本地，记录为 txid.json 的文件，完整的合约日志会记录到 ApplicationLogs 目录。使用 cli 提供的 rpc 接口 getapplicationlog，根据指定的 NEP-5 交易 ID 就可以查到对应的 notifications。如下：
+
+知道了可以产生 notifications（Notify），那么 notifications 保存在哪里呢？如何获取到它呢？
+首先，notifications 不保存在区块链上，它只有在智能合约执行到产生 notifications 的语句时会输出，在使用 cli 节点同步区块数据时会将所有智能合约相关的操作在智能合约虚拟机 neo-vm 中运行一次，合约的状态等信息就是在运行过程中推出来的。在启动 cli 节点时，如果打开了 --log 命令，节点在运行每个区块中的智能合约相关操作时，会将输出的 notifications 保存到本地 nel-cli 目录下的 ApplicationLogs_ 文件夹中，记录为 txid.json 的文件(2.9 以后改为 区块高度.ldb 的文件了，如 003898.ldb)。然后我们使用 cli 提供的 rpc 接口 getapplicationlog 就可以查到对应的 notifications，结构如下：
+
 ```
 {
     GET：http://27.115.95.118:20332?jsonrpc=2.0&id=1&method=getapplicationlog&params=["0xe19ecff18894315e088402fe0d53f7a23ff9f2a54dc1042dc9f31212f4b6764a"]
