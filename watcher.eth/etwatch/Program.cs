@@ -1,14 +1,18 @@
 ﻿using Nethereum.Geth;
 using Nethereum.Hex.HexTypes;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace etwatch
 {
     class Program
     {
+        private static List<string> userAddrList = new List<string>();
         static void Main(string[] args)
         {
+            userAddrList.Add("adsada");
+            userAddrList.Add("adqqwq");
             SyncMain(args);
             while (true)
             {

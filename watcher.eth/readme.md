@@ -1,41 +1,41 @@
-1.ÒÔÌ«·»½Úµã£¬×î³£ÓÃµÄÊÇ geth£¬goÓïÑÔÊµÏÖµÄ°æ±¾
+1.ä»¥å¤ªåŠèŠ‚ç‚¹ï¼Œæœ€å¸¸ç”¨çš„æ˜¯ gethï¼Œgoè¯­è¨€å®ç°çš„ç‰ˆæœ¬
 
-Æô¶¯ĞèÒª´ø²ÎÊı
+å¯åŠ¨éœ€è¦å¸¦å‚æ•°
 
-ÎÒ²âÊÔÊ¹ÓÃ
+æˆ‘æµ‹è¯•ä½¿ç”¨
 
 geth --rpc --syncmode "fast" --cache=512 console
 
---rpc ÊÇ´ò¿ªrpc½Ó¿Ú£¬Ä¬ÈÏ http://localhost:8545 ¿ÉÒÔÓÃ²ÎÊı¸Ä
+--rpc æ˜¯æ‰“å¼€rpcæ¥å£ï¼Œé»˜è®¤ http://localhost:8545 å¯ä»¥ç”¨å‚æ•°æ”¹ï¼Œä¿®æ”¹åœ°å€ç«¯å£ï¼šgeth --rpc --rpcaddr ip --rpcport portnumberï¼Œä¾‹å¦‚ï¼šgeth --rpc --rpcaddr 10.1.1.16 --rpcport 2233
 
---syncmode "fast" ÊÇÍ¬²½Ä£Ê½£¬ÓĞ full fast light ÈıÖÖ£¬¾İËµfullÒª¼¸Ìì£¬ fast Ò»Ìì£¬lightÂíÉÏ¾ÍÓÃ£¬µ«ÊÇ°²È«ĞÔ×îµÍ
+--syncmode "fast" æ˜¯åŒæ­¥æ¨¡å¼ï¼Œæœ‰ full fast light ä¸‰ç§ï¼Œæ®è¯´fullè¦å‡ å¤©ï¼Œ fast ä¸€å¤©ï¼Œlighté©¬ä¸Šå°±ç”¨ï¼Œä½†æ˜¯å®‰å…¨æ€§æœ€ä½
 
---cache=512 512M»º´æ£¬¾İËµÔ½´óÔ½¿ì£¬ÎÒÃ»ÓĞ²âÊÔ
+--cache=512 512Mç¼“å­˜ï¼Œæ®è¯´è¶Šå¤§è¶Šå¿«ï¼Œæˆ‘æ²¡æœ‰æµ‹è¯•
 
-console ´ò¿ª¿ØÖÆÌ¨£¬Èç¹û²»¼ÓÕâ¸ö£¬Õâ¸ö½ÚµãÃ»ÓĞÈÎºÎ½»»¥¡£
+console æ‰“å¼€æ§åˆ¶å°ï¼Œå¦‚æœä¸åŠ è¿™ä¸ªï¼Œè¿™ä¸ªèŠ‚ç‚¹æ²¡æœ‰ä»»ä½•äº¤äº’ã€‚
 
-¿ØÖÆÌ¨³£ÓÃÃüÁî
+æ§åˆ¶å°å¸¸ç”¨å‘½ä»¤
 
-eth.syncing Í¬²½×´Ì¬¼ì²â
-eth.getBlockNumber ÏÔÊ¾µ±Ç°¿é£¨¼´¸ß¶È£©
+eth.syncing åŒæ­¥çŠ¶æ€æ£€æµ‹
+eth.getBlockNumber æ˜¾ç¤ºå½“å‰å—ï¼ˆå³é«˜åº¦ï¼‰
 
-·¢½»Ò×Òª¿¼ÂÇ eth.getBlockNumber
+å‘äº¤æ˜“è¦è€ƒè™‘ eth.getBlockNumber
 
-¶øÎÒÃÇÖ»ÊÇ¼à²â£¬²»ÓÃ¹Ü£¬Ö÷Òª¶¢×¡ eth.syncing ÀïÃæµÄ CurrentBlock ¼´¿É¡£eth.syncingÖĞµÄHighestBlockÎªÍøÂç×î¸ß¿é
+è€Œæˆ‘ä»¬åªæ˜¯ç›‘æµ‹ï¼Œä¸ç”¨ç®¡ï¼Œä¸»è¦ç›¯ä½ eth.syncing é‡Œé¢çš„ CurrentBlock å³å¯ã€‚eth.syncingä¸­çš„HighestBlockä¸ºç½‘ç»œæœ€é«˜å—
 
-2.watch³ÌĞòµÄÊ¹ÓÃ
+2.watchç¨‹åºçš„ä½¿ç”¨
 
-ÒÀÀµnuget Nethereum.Geth
+ä¾èµ–nuget Nethereum.Geth
 
-ĞèÒªµÄÖ¸Áî
-a.Web3.Eth.Syncing µÃµ½ÍøÂç×î¸ß¿éºÍÁ¬½ÓµÄ½ÚµãµÄ¿ÉÓÃ¿é£¬¼´CurrentBlock HighestBlock
-b.Web3.Eth.Blocks.GetBlockWithTransactionsByNumber ¸ù¾İ¸ß¶ÈµÃµ½Ò»¸ö¿éºÍËûÀïÃæµÄ½»Ò×
-c.½»Ò×µÄfrom to value ¾ÍÊÇ ethµÄ×ªÒÆÁ¿¡£ÆäËüµÄ´ú±Ò¶¼ÊÇerc20 Ã»ÑĞ¾¿ÔõÃ´¹Û²ì£¬eth Ö±½Ó¹Û²ì from to value ¼´¿É
+éœ€è¦çš„æŒ‡ä»¤
+a.Web3.Eth.Syncing å¾—åˆ°ç½‘ç»œæœ€é«˜å—å’Œè¿æ¥çš„èŠ‚ç‚¹çš„å¯ç”¨å—ï¼Œå³CurrentBlock HighestBlock
+b.Web3.Eth.Blocks.GetBlockWithTransactionsByNumber æ ¹æ®é«˜åº¦å¾—åˆ°ä¸€ä¸ªå—å’Œä»–é‡Œé¢çš„äº¤æ˜“
+c.äº¤æ˜“çš„from to value å°±æ˜¯ ethçš„è½¬ç§»é‡ã€‚å…¶å®ƒçš„ä»£å¸éƒ½æ˜¯erc20 æ²¡ç ”ç©¶æ€ä¹ˆè§‚å¯Ÿï¼Œeth ç›´æ¥è§‚å¯Ÿ from to value å³å¯
 
-watch ÑİÊ¾³ÌĞòÓÃ·¨
-a.ÏÈ´ò¿ª±¾µØgeth½Úµã,ÑİÊ¾³ÌĞòÁ¬½Ó         private const string url = "http://127.0.0.1:8545/";
-b.ÊäÈë info Ö´ĞĞWeb3.Eth.Syncing
-c.ÊäÈë getblock 123123 ÏÔÊ¾ÖÆ¶¨¿éµÄĞÅÏ¢
+watch æ¼”ç¤ºç¨‹åºç”¨æ³•
+a.å…ˆæ‰“å¼€æœ¬åœ°gethèŠ‚ç‚¹,æ¼”ç¤ºç¨‹åºè¿æ¥         private const string url = "http://127.0.0.1:8545/";
+b.è¾“å…¥ info æ‰§è¡ŒWeb3.Eth.Syncing
+c.è¾“å…¥ getblock 123123 æ˜¾ç¤ºåˆ¶å®šå—çš„ä¿¡æ¯
 
-3.ÅÀ³æµÄ¿ª·¢£¬ÂÔ
-´Ë´¦ÒÑ¾­Ìá¹©ÁËËùÓĞµÄ¹¦ÄÜ£¬ÅÀ³æ½Ó×Å¶Ñ³öÂß¼­¼´¿É
+3.çˆ¬è™«çš„å¼€å‘ï¼Œç•¥
+æ­¤å¤„å·²ç»æä¾›äº†æ‰€æœ‰çš„åŠŸèƒ½ï¼Œçˆ¬è™«æ¥ç€å †å‡ºé€»è¾‘å³å¯

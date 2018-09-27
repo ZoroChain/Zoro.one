@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace btwatch
 {
     class Program
     {
+        private static List<string> userAddrList = new List<string>();
         static void Main(string[] args)
         {
+            userAddrList.Add("123");
+            userAddrList.Add("13221");
             Console.WriteLine("Hello World!");
 
             AsyncMain();
@@ -24,7 +28,7 @@ namespace btwatch
         static async void TestRest()
         {
             //restClient 无需验证 但是功能太少，都不能用block index 获取block
-            NBitcoin.RPC.RestClient restC = new NBitcoin.RPC.RestClient(new Uri("http://127.0.0.1:18332"));
+            NBitcoin.RPC.RestClient restC = new NBitcoin.RPC.RestClient(new Uri("http://127.0.0.1:8332"));
             var info = await restC.GetChainInfoAsync();
             Console.WriteLine("chain=" + info.Chain);
             Console.WriteLine("blockcount=" + info.Blocks);
@@ -34,7 +38,7 @@ namespace btwatch
             //使用rpcClient 需要配置验证用户名和密码，可用如下参数配置
             //bitcoin-qt -server -rest -testnet -rpcuser=1 -rpcpassword=1
             var key = new System.Net.NetworkCredential("1", "1");
-            var uri = new Uri("http://127.0.0.1:18332");
+            var uri = new Uri("http://127.0.0.1:8332");
             NBitcoin.RPC.RPCClient rpcC = new NBitcoin.RPC.RPCClient(key, uri);
             var binfo = await rpcC.GetBlockchainInfoAsync();
 
@@ -44,7 +48,7 @@ namespace btwatch
             var count = await rpcC.GetBlockCountAsync();
             Console.WriteLine("blockcount quick=" + count);
 
-            for(var i=0;i<10000;i++)
+            for (var i = count - 1; i < count; i++)
             {
                 await GetOneBlock(rpcC, i);
             }
@@ -68,7 +72,11 @@ namespace btwatch
                 {
                     var vout = tran.Outputs[vo];
                     var address = vout.ScriptPubKey.GetDestinationAddress(rpcC.Network);//注意比特币地址和网络有关，testnet 和mainnet地址不通用
-
+                    userAddrList.ForEach(x =>
+                    {
+                        if (address.ToString() == x)
+                            Console.WriteLine("Have a transfer for :" + address);
+                    });
                     Console.WriteLine("Output" + vo + ":  recvier=" + address + " money=" + vout.Value.ToString());
                 }
             }
