@@ -16,7 +16,7 @@ bitcoin 客户端提供了rpc机制
 
 使用如下命令开启
 
-	C:\Program Files\Bitcoin>bitcoin-qt -server -rest -testnet -rpcuser=1 -rpcpassword=1
+	C:\Program Files\Bitcoin>bitcoin-qt -server -rest -testnet -rpcuser=1 -rpcpassword=1 -rpcbind=0.0.0.0:18332 -rpcallowip=0.0.0.0/::
 
 	-server 是打开服务器，必选
 
@@ -29,6 +29,10 @@ bitcoin 客户端提供了rpc机制
 	-rpcpassword 配置rpc连接密码 必选
 
 2.修改启动ip和端口：-rpcbind=addr:port，如：-rpcbind=10.1.1.6::8332，必须同时设定-rpcallowip才可生效：-rpcallowip=ipaddress/掩码，如：-rpcallowip=10.1.1.8/255.255.255.0
+
+   -rpcbind=0.0.0.0:18332  0.0.0.0 表示监视所有ip，可指定
+    
+   -rpcallowip=0.0.0.0/::  allowip 0.0.0.0 表示允许所有访问
 
 3.测试程序说明
 

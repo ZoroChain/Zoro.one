@@ -4,9 +4,11 @@
 
 我测试使用
 
-geth --rpc --syncmode "fast" --cache=512 console
+geth --rpc --syncmode "fast" --cache=512 console --rpcaddr=0.0.0.0
 
 --rpc 是打开rpc接口，默认 http://localhost:8545 可以用参数改，修改地址端口：geth --rpc --rpcaddr ip --rpcport portnumber，例如：geth --rpc --rpcaddr 10.1.1.16 --rpcport 2233
+
+--rpcaddr=0.0.0.0 表示监听所有ip
 
 --syncmode "fast" 是同步模式，有 full fast light 三种，据说full要几天， fast 一天，light马上就用，但是安全性最低
 
